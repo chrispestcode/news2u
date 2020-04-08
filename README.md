@@ -17,9 +17,9 @@ Majority of the code is written in the `components` folder. It consists of `Base
 
 `Base Card` serves as the foundation for the app, containing the header, footer, and `Listings Card` component.
 
-`Listings Card` component contains the logic for toggling between `NewsListingsCard` and `SavedNewsListingCard`. Any data that may be transferred between these two components can be facilitated through `Listings Card` component.
+`ListingsCard` component contains the logic for toggling between `NewsListingsCard` and `SavedNewsListingCard` tabs in the navbar. Any data that may be transferred between these two components can be facilitated through `ListingsCard` component.
 
-`NewsListingsCard` component contains the logic for listing each individual article. It evokes an API request upon mounting and saves any saved articles to `localStorage` before destruction.  Here is where the `NewsCard` is contained.
+`NewsListingsCard` component contains the logic for listing each individual article in a grid format. It evokes an API request upon mounting and saves any saved articles to `localStorage` before destruction.  Here is where the `NewsCard` is contained.
 
 `NewsCard` component contains little functionality besides returning any save functionality back to the parent. It is mainly used for displaying the content and redirecting the user to the link.
 
@@ -27,15 +27,6 @@ Majority of the code is written in the `components` folder. It consists of `Base
 
 Local storage is used to store the saved articles. The current storage requirement is minimal, so a lightweight storage was used.
 
-To run the application, download the file. Navigate to the root folder `news2u`. Ensure that npm is installed : `npm install npm@latest -g` and run the command `npm run serve`. If there are missing dependencies for the command, follow the CLI prompt to install them. After the compilation is successful, navigate to localhost:8080 in the browser and the application will be available.
-
-
-Future improvements:
-
-Possible improvements to enhance the application could include:
- 	1) deprecating parts of `NewsCard` into a dumb component. This would remove the logic and allow the a more basic component to be reused/inherited to create more complex features, such as a video in place of a still-image.
-	2) addition of a sorting feature. The NewsAPI has more information that can be utilized to bring a flexible, holistic experience to the user.
-	3) removal of the api Key. Currently, the API key is exposed to the user. The use of environment variables or database storage would ensure greater security.
-  4) Unsaving functionality
+To run the application, download the file. Navigate to the root folder `news2u`. Ensure that npm is installed : `npm install npm@latest -g` and run the command `npm run serve`. If there are missing dependencies for the command, follow the CLI prompt to install them. After the compilation is successful, navigate to `localhost:8080` in the browser and the application will be available.
 
 Mobile devices are also supported.
