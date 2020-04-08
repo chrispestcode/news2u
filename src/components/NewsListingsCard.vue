@@ -1,9 +1,13 @@
 <template>
-  <div class="border flex" id="current-news">
+  <div class="border" id="current-news">
     <div class="active-cyan-4 mb-4">
       <input class="form-control" type="text"
         placeholder="Search" id="news-searchbar"
-        :v-model="search" @keyup.enter="searchResults">
+        v-model="search" @keyup.enter="searchResults">
+      <button type="submit"  @click.prevent='searchResults'
+        class="mt-3 btn btn-primary btn-lg">
+          Search
+      </button>
     </div>
     <ul class="row p-3 overflow-auto listing">
         <li class="col-md-3 col-xs-12 news-card card"
@@ -29,11 +33,13 @@
       NewsCard
     },
     mounted () {
-      console.log(""+process.env.API_KEY)
       axios
         .get(this.baseUrl + 'top-headlines?country=us&'+'apiKey='+this.apiKey)
         .then(response => {
           this.items = response.data.articles;
+        })
+        .catch((error) => {
+            console.warn('Data could not be retrieved: ' + error);
         })
         if(localStorage.savedNews){
           this.savedNews = JSON.parse(localStorage.getItem('savedNews'))

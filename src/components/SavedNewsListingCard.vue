@@ -46,8 +46,6 @@ export default {
         .map(key => this.savedNews[key])
         .filter(item => {
           item.title.toLowerCase().includes(this.search.toLowerCase())
-      //return this.savedNews.entries(item => {
-      //  item.title.toLowerCase().includes(this.search.toLowerCase())
       })
     }
   },

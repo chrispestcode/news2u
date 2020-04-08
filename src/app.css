@@ -21,19 +21,20 @@ a {
 }
 
 .save-button{
-  width:100px;
+  width:150px;
   margin:5px;
+  align-self: flex-end;
 }
  
  .listing {
-  align-content: center;
    height:1000px;
 }
 
 @media screen and (min-width:900px)
 {
   .row {
-    margin-right: 0%;
-    align-content:right;
+      display:flex;
+      justify-content: center;
+      margin-right:0%;
   }
 }

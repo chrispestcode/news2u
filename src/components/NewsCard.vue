@@ -1,6 +1,6 @@
 <template>
   <div class="news-card">
-    <button type="button" class="btn btn-primary save-button"
+    <button type="button" class="btn btn-warning save-button"
      @click="onSaveNews"  v-if="!saved">
     SAVE
     </button>

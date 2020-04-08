@@ -25,5 +25,5 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
-@import 'app.css?004';
+@import 'app.css?001';
 </style>
