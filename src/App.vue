@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <BaseCard msg="Welcome to Your Vue.js App"/>
+    <img alt="news logo" src="./assets/news-logo.png">
+    <BaseCard/>
   </div>
 </template>
 
@@ -25,4 +25,5 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+@import 'app.css?004';
 </style>

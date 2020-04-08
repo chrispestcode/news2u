@@ -1,48 +1,24 @@
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
-</style>
-
 <template>
-  <div class="header">
-    Welcome to News2U!
-  </div>
-  <div class="main-content">
-    <NewsListingCard />
-    <SavedNewsListingCard />
-  </div>
-  <div class="footer">
-    FOOTER
-  </div>
+  <div>
+    <div class="">
+      <div class="header py-5 font-weight-bold" id="page-header">
+        <h1>Welcome to News2U!</h1>
+      </div>
+    </div>
+    <ListingsCard />
+    <div class="footer py-5 bg-info text-white" id="page-footer">
+      The data collected and utilized is courtesy of NewsApi.org
+    </div>
+</div>
 </template>
 
 <script>
-import NewsListingCard from './NewsListingCard.vue'
-import SavedNewsListingCard from './SavedNewsListingCard.vue'
+import ListingsCard from './ListingsCard.vue'
 
 export default {
   name: 'BaseCard',
   components: {
-    NewsListingCard,
-    SavedNewsListingCard
-  },
-  props: {
-    msg: String
+    ListingsCard
   }
 }
 </script>
