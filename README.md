@@ -17,9 +17,9 @@ Majority of the code is written in the `components` folder. It consists of `Base
 
 `Base Card` serves as the foundation for the app, containing the header, footer, and `ListingsCard` component.
 
-`ListingsCard` component contains the logic for toggling between `NewsListingsCard` and `SavedNewsListingCard`. Any data that may be transferred between these two components can be facilitated through `Listings Card` component.
+`ListingsCard` component contains the logic for toggling between `NewsListingsCard` and `SavedNewsListingCard` tabs in the navbar. Any data that may be transferred between these two components can be facilitated through `ListingsCard` component.
 
-`NewsListingsCard` component contains the logic for listing each individual article. It evokes an API request upon mounting and saves any saved articles to `localStorage` before destruction.  Here is where the `NewsCard` is contained.
+`NewsListingsCard` component contains the logic for listing each individual article in a grid format. It evokes an API request upon mounting and saves any saved articles to `localStorage` before destruction.  Here is where the `NewsCard` is contained.
 
 `NewsCard` component contains little functionality besides returning any save functionality back to the parent. It is mainly used for displaying the content and redirecting the user to the link.
 
