@@ -1,15 +1,15 @@
 <template>
-  <div class="border" id="current-news">
-    <div class="active-cyan-4 mb-4">
-      <input class="form-control" type="text"
+  <div class="border flex" id="current-news">
+    <div class="active-cyan-4 mb-4 justify-content-end">
+      <input class="form-control custom-search-bar" type="text"
         placeholder="Search" id="news-searchbar"
-        v-model="search" @keyup.enter="searchResults">
+        v-model="search" @keyup.enter="searchResults" />
       <button type="submit"  @click.prevent='searchResults'
-        class="mt-3 btn btn-primary btn-lg">
+        class="btn btn-primary btn">
           Search
       </button>
     </div>
-    <ul class="row p-3 overflow-auto listing">
+    <ul class="row p-3 listings">
         <li class="col-md-3 col-xs-12 news-card card"
           is="NewsCard"
           v-for="item in items"
@@ -42,7 +42,7 @@
             console.warn('Data could not be retrieved: ' + error);
         })
         if(localStorage.savedNews){
-          this.savedNews = JSON.parse(localStorage.getItem('savedNews'))
+            //this.savedNews = JSON.parse(localStorage.getItem('savedNews'))
         }
     },
     data() {
@@ -51,13 +51,14 @@
         baseUrl: 'http://newsapi.org/v2/',
         apiKey: '2120e19849cd48cd89756ac431f38fe3',
         search: '',
-        savedNews: Object
+        savedNews: []
       }
     },
     methods: {
       containsKey(obj, key){
-        var result = Object.keys(obj).includes(key)
-        return result
+        // var result = Object.keys(obj).includes(key)
+        // return result
+        return true;
       },
       searchResults() {
         axios
@@ -67,15 +68,20 @@
           })
       },
       handleSaveNews(item) {
-        if(!this.containsKey(this.savedNews, item.url)){
-          this.savedNews = {[item.url]: item,...this.savedNews}
-        }
-        else {
-          delete(this.savedNews, item.url)
-        }
+          console.log(JSON.stringify(this.savedNews))
+          /*console.log(Array.isArray(this.items))
+          if(Array.isArray(this.savedNews)){
+            if(!this.containsKey(this.savedNews, item.url)){
+              this.savedNews = this.savedNews.push({[item.url]: item});
+            }
+            else {
+              this.savedNews.splice(this.savedNews.indexOf({[item.url]: item}), 1);
+            }
+          }*/
       },
     },
     beforeDestroy() {
+      console.log(this.savedNews)
       localStorage.setItem('savedNews',JSON.stringify(this.savedNews))
     }
   }

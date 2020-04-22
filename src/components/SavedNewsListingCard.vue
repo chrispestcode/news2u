@@ -1,13 +1,13 @@
 <template>
   <div class="border flex" id="saved-news">
-    <div class="active-cyan-4 mb-4">
-      <input class="form-control" v-model="search" id="save-filter"
+    <div class="active-cyan-4 mb-4 justify-content-end">
+      <input class="form-control custom-search-bar" v-model="search" id="save-filter"
         type="text" placeholder="Filter saved news">
     </div>
-    <ul class="row p-3 overflow-auto listing" id="save-content">
+    <ul class="row p-3 overflow-auto listings" id="save-content">
       <li class="col-md-3 col-xs-12 news-card card"
         is="NewsCard"
-        v-for="item in savedNews"
+        v-for="item in filteredSavedNews"
         :key="item.url"
         :item="item"
         :saved="containsKey(savedNews,item.url)"
@@ -29,7 +29,7 @@ export default {
   data() {
     return {
       search: '',
-      savedNews: Object
+      savedNews: []
     }
   },
   methods: {
@@ -42,11 +42,13 @@ export default {
   },
   computed: {
     filteredSavedNews() {
-    return  Object.keys(this.savedNews)
-        .map(key => this.savedNews[key])
-        .filter(item => {
-          item.title.toLowerCase().includes(this.search.toLowerCase())
-      })
+      console.log((Object.keys(this.savedNews)))/*
+      /* if(!(this.savedNews == 'Function')){
+      return this.savedNews.filter(item => {
+           return item.url.toLowerCase().indexOf(this.search.toLowerCase()) > -1
+        }) */
+
+        return this.savedNews
     }
   },
   mounted() {
