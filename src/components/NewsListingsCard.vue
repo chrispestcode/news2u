@@ -9,7 +9,7 @@
           Search
       </button>
     </div>
-    <ul class="row p-3 listings">
+    <ul class="row p-1 listings hide-scrollbar">
         <li class="col-md-3 col-xs-12 news-card card"
           is="NewsCard"
           v-for="item in items"
@@ -42,7 +42,7 @@
             console.warn('Data could not be retrieved: ' + error);
         })
         if(localStorage.savedNews){
-            //this.savedNews = JSON.parse(localStorage.getItem('savedNews'))
+          this.savedNews = JSON.parse(localStorage.getItem('savedNews'))
         }
     },
     data() {
@@ -51,14 +51,13 @@
         baseUrl: 'http://newsapi.org/v2/',
         apiKey: '2120e19849cd48cd89756ac431f38fe3',
         search: '',
-        savedNews: []
+        savedNews: Object
       }
     },
     methods: {
       containsKey(obj, key){
-        // var result = Object.keys(obj).includes(key)
-        // return result
-        return true;
+        var result = Object.keys(obj).includes(key)
+        return result
       },
       searchResults() {
         axios
@@ -68,20 +67,15 @@
           })
       },
       handleSaveNews(item) {
-          console.log(JSON.stringify(this.savedNews))
-          /*console.log(Array.isArray(this.items))
-          if(Array.isArray(this.savedNews)){
-            if(!this.containsKey(this.savedNews, item.url)){
-              this.savedNews = this.savedNews.push({[item.url]: item});
-            }
-            else {
-              this.savedNews.splice(this.savedNews.indexOf({[item.url]: item}), 1);
-            }
-          }*/
+        if(!this.containsKey(this.savedNews, item.url)){
+          this.savedNews = {[item.url]: item,...this.savedNews}
+        }
+        else {
+          this.$delete(this.savedNews, item.url)
+        }
       },
     },
     beforeDestroy() {
-      console.log(this.savedNews)
       localStorage.setItem('savedNews',JSON.stringify(this.savedNews))
     }
   }

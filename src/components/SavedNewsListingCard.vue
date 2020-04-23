@@ -4,14 +4,14 @@
       <input class="form-control custom-search-bar" v-model="search" id="save-filter"
         type="text" placeholder="Filter saved news">
     </div>
-    <ul class="row p-3 overflow-auto listings" id="save-content">
+    <ul class="row p-3 overflow-auto listings hide-scrollbar" id="save-content">
       <li class="col-md-3 col-xs-12 news-card card"
         is="NewsCard"
         v-for="item in filteredSavedNews"
         :key="item.url"
         :item="item"
-        :saved="containsKey(savedNews,item.url)"
-        @onSaveNews="onSaveNews"
+        :saved="containsKey(item.url)"
+        @onSaveNews="handleUnsaveNews"
         >
       </li>
     </ul>
@@ -29,32 +29,45 @@ export default {
   data() {
     return {
       search: '',
-      savedNews: []
+      savedNews: [],
+      savedNewsStorage: {}
     }
   },
   methods: {
-    onSaveNews(item) {
-      this.$emit("onSaveNews", item)
+    handleUnsaveNews(item) {
+        this.$delete(this.savedNewsStorage, item.url)
+        this.savedNews.splice(this.savedNews.indexOf(item), 1);
+
     },
-    containsKey(obj, key){
-      return Object.keys(obj).includes(key)
+    containsKey(key){
+      if (this.savedNewsStorage==null){
+        return false;
+      }
+      return Object.keys(this.savedNewsStorage).includes(key)
     },
   },
   computed: {
     filteredSavedNews() {
-      console.log((Object.keys(this.savedNews)))/*
-      /* if(!(this.savedNews == 'Function')){
-      return this.savedNews.filter(item => {
+       if(!(typeof(this.savedNew) == 'function')){
+         return this.savedNews.filter(item => {
            return item.url.toLowerCase().indexOf(this.search.toLowerCase()) > -1
-        }) */
-
+          })
+        }
         return this.savedNews
     }
   },
   mounted() {
     if(localStorage.savedNews){
-      this.savedNews = JSON.parse(localStorage.getItem('savedNews'))
+      this.savedNewsStorage = JSON.parse(localStorage.getItem('savedNews'))
+      let test = this.savedNewsStorage
+      this.savedNews = Object.keys(test).map((key) => {
+          return test[key]
+      })
+      console.log("J + " + JSON.stringify(this.savedNewsStorage))
     }
+  },
+  beforeDestroy() {
+      localStorage.setItem('savedNews',JSON.stringify(this.savedNewsStorage))
   }
 }
 </script>
