@@ -65,6 +65,9 @@
           .then(response => {
             this.items = response.data.articles;
           })
+          .catch((error) => {      //did not have this and it was drastically slower on searching
+              console.warn('Data could not be retrieved: ' + error);
+          })
       },
       handleSaveNews(item) {
         if(!this.containsKey(this.savedNews, item.url)){
