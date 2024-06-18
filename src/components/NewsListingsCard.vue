@@ -49,7 +49,7 @@
       return {
         items: [],
         baseUrl: 'http://newsapi.org/v2/',
-        apiKey: '2120e19849cd48cd89756ac431f38fe3',
+        apiKey: '',
         search: '',
         savedNews: Object
       }
